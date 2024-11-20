@@ -4,7 +4,7 @@ PORT=$2
 CHAT=$3
 
 # Clone Odoo directory
-git clone --depth=1 https://github.com/minhng92/odoo-17-docker-compose $DESTINATION
+git clone --depth=1 https://github.com/jtubellac/odoo-17-docker-compose $DESTINATION
 rm -rf $DESTINATION/.git
 
 # Create PostgreSQL directory
@@ -42,6 +42,9 @@ fi
 # Set file and directory permissions after installation
 find $DESTINATION -type f -exec chmod 644 {} \;
 find $DESTINATION -type d -exec chmod 755 {} \;
+
+# Dar permisos de ejecución específicamente al entrypoint.sh
+chmod +x $DESTINATION/entrypoint.sh
 
 # Run Odoo
 docker-compose -f $DESTINATION/docker-compose.yml up -d
